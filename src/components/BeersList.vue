@@ -34,5 +34,11 @@ export default {
 <style>
 select {
     height: 30px;
+    background-color: powderblue;
+    border-radius: 12px;
+}
+
+form {
+    text-align: center;
 }
 </style>

@@ -16,5 +16,16 @@ export default {
 </script>
 
 <style>
+ul {
+
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
 
 </style>

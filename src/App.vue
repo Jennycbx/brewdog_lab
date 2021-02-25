@@ -3,7 +3,7 @@
     <h1>Beers</h1>
     <beers-list :beers="beers" :favBeers='favouriteBeers'></beers-list>
     <beer-detail :beer='selectedBeer' :favBeers='favouriteBeers'></beer-detail>
-    <h2>Favourite Beers</h2>
+    <h2 id='fav-beer' v-if='favouriteBeers.length'>Favourite Beers</h2>
     <favourite-beers :favBeers='favouriteBeers'></favourite-beers>
 
   </div>
@@ -21,7 +21,6 @@ export default {
   data() {
     return {
       beers: [],
-      beers1: [],
 
       favouriteBeers: [],
 
@@ -52,12 +51,18 @@ export default {
   },
   methods: {
     fetchBeer: function() {
-      fetch('https://api.punkapi.com/v2/beers?page=1&per_page=80')
+      const fetch1 = fetch('https://api.punkapi.com/v2/beers?page=1&per_page=80')
         .then(response => response.json())
-        .then(data => this.beers = data)
-      // fetch('https://api.punkapi.com/v2/beers?page=2&per_page=80')
-      //   .then(response => response.json())
-      //   .then(data => this.beers.push(data))
+      const fetch2 = fetch('https://api.punkapi.com/v2/beers?page=2&per_page=80')
+        .then(response => response.json())
+      const fetch3 = fetch('https://api.punkapi.com/v2/beers?page=3&per_page=80')
+        .then(response => response.json())
+      const fetch4 = fetch('https://api.punkapi.com/v2/beers?page=4&per_page=80')
+        .then(response => response.json())
+      const fetch5 = fetch('https://api.punkapi.com/v2/beers?page=5&per_page=80')
+        .then(response => response.json())
+      Promise.all([fetch1, fetch2, fetch3, fetch4, fetch5])
+        .then(data => this.beers = (data.flat(1)))
     },
     handleRemovalClick: function(beer) {
       const index = this.favouriteBeers.indexOf(this.selectedBeer)
@@ -70,6 +75,19 @@ export default {
 }
 </script>
 
-<style>
+<style >
+body {
+  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20191116/pngtree-yellow-gradient-beer-bubble-texture-creative-background-image_321722.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 30px;
+}
 
+h1 {
+  text-align: center;
+}
+
+#fav-beer {
+  text-align: center;
+}
 </style>
