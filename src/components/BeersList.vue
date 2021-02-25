@@ -2,7 +2,9 @@
     <form>
         <select v-on:change="handleSelect" v-model='selectedBeer'>
             <option disabled value="">Select a beer</option>
-            <option v-for='(beer, index) in beers' :key='index' :value="beer">{{beer.name}}</option>
+            <option v-for='(beer, index) in beers' :key='index' :value="beer">{{beer.name}}
+                <span v-if='favBeers.includes(beer)'>&#127775;</span>
+            </option>
         </select>
     </form>
 </template>
@@ -17,7 +19,7 @@ export default {
             'selectedBeer': {}
         }
     },
-    props: ['beers'],
+    props: ['beers', 'favBeers'],
     methods: {
         handleSelect() {
             this.search = ""
@@ -30,5 +32,7 @@ export default {
 </script>
 
 <style>
-
+select {
+    height: 30px;
+}
 </style>

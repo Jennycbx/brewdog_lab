@@ -9,7 +9,8 @@
 <script>
 export default {
     name: 'favourite-beers',
-    props: ['favBeers']
+    props: ['favBeers'],
+   
 
 }
 </script>

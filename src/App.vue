@@ -1,9 +1,8 @@
 <template>
   <div id='app'>
     <h1>Beers</h1>
-    <beers-list :beers="beers"></beers-list>
-    <beer-detail :beer='selectedBeer'></beer-detail>
-    <button v-if="!this.favouriteBeers.includes(this.selectedBeer)" v-on:click='handleClick'>Add to Favourites</button>
+    <beers-list :beers="beers" :favBeers='favouriteBeers'></beers-list>
+    <beer-detail :beer='selectedBeer' :favBeers='favouriteBeers'></beer-detail>
     <h2>Favourite Beers</h2>
     <favourite-beers :favBeers='favouriteBeers'></favourite-beers>
 
@@ -42,19 +41,31 @@ export default {
     eventBus.$on('beer-selected', (beer) => {
       this.selectedBeer = beer
     })
+
+    eventBus.$on('beer-removal', (beer) => {
+      this.handleRemovalClick(beer)
+    })
+
+    eventBus.$on('beer-add', (beer) => {
+      this.handleAddClick(beer)
+    })
   },
   methods: {
     fetchBeer: function() {
       fetch('https://api.punkapi.com/v2/beers?page=1&per_page=80')
         .then(response => response.json())
         .then(data => this.beers = data)
-      fetch('https://api.punkapi.com/v2/beers?page=2&per_page=80')
-        .then(response => response.json())
-        .then(data => this.beers.push(data))
+      // fetch('https://api.punkapi.com/v2/beers?page=2&per_page=80')
+      //   .then(response => response.json())
+      //   .then(data => this.beers.push(data))
     },
-    handleClick: function() {
+    handleRemovalClick: function(beer) {
+      const index = this.favouriteBeers.indexOf(this.selectedBeer)
+      this.favouriteBeers.splice(index, 1)
+    },
+    handleAddClick: function(beer) {
       this.favouriteBeers.push(this.selectedBeer)
-    }
+    },
   },
 }
 </script>
