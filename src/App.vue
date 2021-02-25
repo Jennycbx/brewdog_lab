@@ -3,7 +3,7 @@
     <h1>Beers</h1>
     <beers-list :beers="beers" :favBeers='favouriteBeers'></beers-list>
     <beer-detail :beer='selectedBeer' :favBeers='favouriteBeers'></beer-detail>
-    <h2 id='fav-beer' v-if='favouriteBeers.length'>Favourite Beers</h2>
+    <h2 id='fav-beer'>Favourite Beers</h2>
     <favourite-beers :favBeers='favouriteBeers'></favourite-beers>
 
   </div>
@@ -21,9 +21,7 @@ export default {
   data() {
     return {
       beers: [],
-
       favouriteBeers: [],
-
       selectedBeer: null
     }
   },

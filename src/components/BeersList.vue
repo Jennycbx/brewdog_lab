@@ -36,6 +36,8 @@ select {
     height: 30px;
     background-color: powderblue;
     border-radius: 12px;
+    padding-left: 10px;
+    
 }
 
 form {
